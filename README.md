@@ -66,8 +66,30 @@ pytest --cov
 
 Sample test output:
 
+Today's Schedule
+----------------
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Status: Pending
+08:00 | Luna | Medication (Medication) | Priority: high | Status: Pending
+14:30 | Luna | Vet appointment (Appointment) | Priority: high | Status: Pending
+18:00 | Max | Evening walk (Exercise) | Priority: medium | Status: Pending
+
+Scheduling Conflicts
+--------------------
+Conflict at 08:00: Max's task 'Morning feeding' overlaps with Luna's task 'Medication'.
+
 ```
 # Paste your pytest output here
+
+============================================================================= test session starts =============================================================================
+platform win32 -- Python 3.14.6, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Users\kevor\OneDrive\Desktop\DesktopBackup\Universidad\CodePath\Project 2\ai110-module2show-pawpal-starter
+plugins: anyio-4.13.0
+collected 2 items                                                                                                                                                              
+
+tests\test_pawpal.py ..                                                                                                                                                  [100%]
+
+============================================================================== 2 passed in 0.06s ==============================================================================
+
 ```
 
 ## 📐 Smarter Scheduling

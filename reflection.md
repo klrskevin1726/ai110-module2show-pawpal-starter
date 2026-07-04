@@ -84,6 +84,10 @@ The Scheduler class manages the algorithmic part of the system. It organizes tas
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
+My overall design did not change during this phase. After reviewing the UML and the `pawpal_system.py` skeleton, the four-class structure still made sense: Owner manages pets, Pet manages tasks, Task represents a care activity, and Scheduler organizes the tasks.
+
+The AI review suggested that future implementation should make relationships and rules more explicit, especially how dates are handled and what counts as a scheduling conflict. I decided not to add new classes or methods yet because the current skeleton matches the UML and keeps the design simple. I will define those details during the implementation phase.
+
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
