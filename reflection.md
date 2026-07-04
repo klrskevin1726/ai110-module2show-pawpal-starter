@@ -127,10 +127,18 @@ One tradeoff my scheduler makes is that it detects conflicts only when two tasks
 - What behaviors did you test?
 - Why were these tests important?
 
+I tested the most important behaviors in the PawPal+ system. These included marking a task as complete, adding a task to a pet, sorting tasks by time, creating a new task for a daily recurring task, and detecting conflicts when two tasks have the same time.
+
+These tests were important because they verify that the main logic of the app works before connecting or relying on the Streamlit interface. They also help confirm that the scheduler can organize tasks correctly and warn the user when there is a scheduling conflict.
+
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
+
+I am fairly confident that my scheduler works correctly for the current version of PawPal+. The tests passed and covered the main expected behaviors.
+
+If I had more time, I would test more edge cases, such as invalid time formats, pets with no tasks, completed tasks not appearing in today’s schedule, and tasks that overlap by duration instead of only having the exact same time.
 
 ---
 
@@ -147,3 +155,37 @@ One tradeoff my scheduler makes is that it detects conflicts only when two tasks
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+
+
+
+## Testing PawPal+
+
+To verify the PawPal+ system, I used `pytest` to test the core scheduling behavior.
+
+The test suite covers:
+- Task completion
+- Adding tasks to pets
+- Sorting tasks in chronological order
+- Creating the next occurrence for daily recurring tasks
+- Detecting scheduling conflicts when two tasks have the same time
+
+Command used to run tests:
+
+```bash
+py -m pytest
+```
+
+Successful test output:
+
+```txt
+collected 5 items
+
+tests\test_pawpal.py .....                                              [100%]
+
+5 passed
+```
+
+Confidence Level: 4/5 stars
+
+I am confident that the main scheduling logic works correctly for the current project requirements. The tests verify the most important behaviors, but I would add more edge case tests later for invalid time formats, pets with no tasks, and overlapping time ranges.
