@@ -76,33 +76,70 @@ else:
                 st.error("Please enter a task title and due time.")
 
 
-st.header("Today's Schedule")
+    st.header("Today's Schedule")
 
-scheduler.load_tasks_from_owner(owner)
-today_tasks = scheduler.get_today_tasks()
+    scheduler.load_tasks_from_owner(owner)
 
-if not today_tasks:
-    st.info("No tasks scheduled yet.")
-else:
-    for pet_name, task in today_tasks:
-        status = "Done" if task.completed else "Pending"
+    pet_filter = st.selectbox(
+        "Filter by pet",
+        ["All pets"] + [pet.name for pet in owner.pets]
+    )
 
-        st.write(
-            f"**{task.due_time}** | {pet_name} | {task.title} "
-            f"({task.category}) | Priority: {task.priority} | Status: {status}"
-        )
+    status_filter = st.selectbox(
+        "Filter by status",
+        ["All tasks", "Pending", "Completed"]
+    )
+
+    if pet_filter == "All pets":
+        selected_pet_name = None
+    else:
+        selected_pet_name = pet_filter
+
+    if status_filter == "Pending":
+        completed_filter = False
+    elif status_filter == "Completed":
+        completed_filter = True
+    else:
+        completed_filter = None
+
+    filtered_tasks = scheduler.filter_tasks(
+        pet_name=selected_pet_name,
+        completed=completed_filter
+    )
+
+    sorted_tasks = sorted(filtered_tasks, key=lambda item: item[1].due_time)
+
+    if not sorted_tasks:
+        st.info("No tasks match the selected filters.")
+    else:
+        schedule_rows = []
+
+        for pet_name, task in sorted_tasks:
+            schedule_rows.append(
+                {
+                    "Time": task.due_time,
+                    "Pet": pet_name,
+                    "Task": task.title,
+                    "Category": task.category,
+                    "Priority": task.priority,
+                    "Recurrence": task.recurrence,
+                    "Status": "Done" if task.completed else "Pending",
+                }
+            )
+
+        st.table(schedule_rows)
 
 
-st.header("Scheduling Conflicts")
+    st.header("Scheduling Conflicts")
 
-conflicts = scheduler.detect_conflicts()
+    conflicts = scheduler.detect_conflicts()
 
-if not conflicts:
-    st.success("No scheduling conflicts found.")
-else:
-    for pet_name_1, task_1, pet_name_2, task_2 in conflicts:
-        st.warning(
-            f"Conflict at {task_1.due_time}: "
-            f"{pet_name_1}'s task '{task_1.title}' overlaps with "
-            f"{pet_name_2}'s task '{task_2.title}'."
-        )
+    if not conflicts:
+        st.success("No scheduling conflicts found.")
+    else:
+        for pet_name_1, task_1, pet_name_2, task_2 in conflicts:
+            st.warning(
+                f"Conflict at {task_1.due_time}: "
+                f"{pet_name_1}'s task '{task_1.title}' overlaps with "
+                f"{pet_name_2}'s task '{task_2.title}'."
+            )
