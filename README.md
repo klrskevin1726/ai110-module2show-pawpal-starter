@@ -103,6 +103,40 @@ tests\test_pawpal.py ..                                                         
 | Conflict handling | | e.g., overlapping time slots |
 | Recurring tasks | | e.g., daily vs. weekly |
 
+
+
+Sorted Schedule
+---------------
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Recurrence: daily | Status: Pending
+08:00 | Luna | Medication (Medication) | Priority: high | Recurrence: daily | Status: Pending
+14:30 | Luna | Vet appointment (Appointment) | Priority: high | Recurrence: none | Status: Pending
+18:00 | Max | Evening walk (Exercise) | Priority: medium | Recurrence: daily | Status: Pending
+
+Pending Tasks
+--------------
+18:00 | Max | Evening walk (Exercise) | Priority: medium | Recurrence: daily | Status: Pending
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Recurrence: daily | Status: Pending
+08:00 | Luna | Medication (Medication) | Priority: high | Recurrence: daily | Status: Pending
+14:30 | Luna | Vet appointment (Appointment) | Priority: high | Recurrence: none | Status: Pending
+
+Tasks for Max
+--------------
+18:00 | Max | Evening walk (Exercise) | Priority: medium | Recurrence: daily | Status: Pending
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Recurrence: daily | Status: Pending
+
+Scheduling Conflicts
+--------------------
+Conflict at 08:00: Max's task 'Morning feeding' overlaps with Luna's task 'Medication'.
+
+Completing Max's recurring task: Morning feeding
+
+Recurring Tasks After Completion
+---------------------------------
+18:00 | Max | Evening walk (Exercise) | Priority: medium | Recurrence: daily | Status: Pending
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Recurrence: daily | Status: Done
+08:00 | Max | Morning feeding (Feeding) | Priority: high | Recurrence: daily | Status: Pending
+08:00 | Luna | Medication (Medication) | Priority: high | Recurrence: daily | Status: Pending
+
 ## 📸 Demo Walkthrough
 
 Describe your app in numbered steps so a reader can follow along without watching a video:

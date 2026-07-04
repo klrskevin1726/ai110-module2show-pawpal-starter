@@ -102,6 +102,8 @@ The AI review suggested that future implementation should make relationships and
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+One tradeoff my scheduler makes is that it detects conflicts only when two tasks have the exact same due date and due time. This keeps the algorithm simple and easy to understand, but it does not detect more complex conflicts such as overlapping task durations. This tradeoff is reasonable for PawPal+ because the current app only stores a single due time for each task, not a start time and end time. If the app became more advanced later, I would add task durations and check for overlapping time ranges.
+
 ---
 
 ## 3. AI Collaboration
